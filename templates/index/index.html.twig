@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <!--================Home Banner Area =================-->
+    <section class="home_preview_inner">
+        <div class="preview_inner d-flex align-items-center">
+            <div class="container">
+                <div class="preview_content bounceIn">
+                    <h2>250 километров</h2>
+                    <h1>Протяженность маршрутной сети</h1>
+                    <a class="main_btn" href="{{ path("about") }}">Узнать больше</a>
+                </div>
+            </div>
+        </div>
+{#        <div class="container">#}
+{#            <form action="{{ path('index') }}" method="post">#}
+{#                <div class="advanced_search">#}
+{#                    <h3>Заказать</h3>#}
+{#                    <div class="form-group text-left">#}
+{#                        <label class="mb-0" for="fio">Ф.И.О:</label>#}
+{#                        <input class="form-control mb-2 text-secondary" type="text" name="fio" placeholder="Ф.И.О."#}
+{#                               required>#}
+{#                    </div>#}
+{#                    <div class="form-group text-left">#}
+{#                        <label class="mb-0" for="dateOt">Дата:</label>#}
+{#                        <input class="form-control mb-2 text-secondary" id="dateOt" type="date" name="date">#}
+{#                    </div>#}
+
+{#                    <div class="form-group text-left">#}
+{#                        <label class="mb-0" for="inputEmail">Email:</label>#}
+{#                        <input type="email" class="form-control mb-2 text-secondary" id="inputEmail"#}
+{#                               aria-describedby="email" name="email" placeholder="Email">#}
+{#                    </div>#}
+
+{#                    <div class="form-group text-left">#}
+{#                        <label class="mb-0" for="telephone">Телефон:</label>#}
+{#                        <div class="input-group">#}
+{#                            <div class="input-group-prepend">#}
+{#                                <span class="input-group-text" style="font-size: 0.99rem">+7</span>#}
+{#                            </div>#}
+{#                            <input type="tel" class="form-control text-secondary" placeholder="(555)-555-55-55"#}
+{#                                   name="phone" id="telephone">#}
+{#                        </div>#}
+{#                    </div>#}
+
+{#                    <div class="form-group text-left">#}
+{#                        <label class="mb-0" for="numberPeople">Кол-во чел.:</label>#}
+{#                        <input type="number" class="form-control mb-2 text-secondary" id="numberPeople" name="number"#}
+{#                               placeholder="0">#}
+{#                    </div>#}
+
+
+{#                    <button type="submit" value="submit" class="btn submit_btn">Отправить заявку</button>#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+    </section>
+    <!--================End Home Banner Area =================-->
+
+
+    <!--================Feature Area =================-->
+    <section class="feature_area p_120">
+        <div class="container">
+            <div class="main_title">
+                <h2>Почему мы самые лучшие?</h2>
+            </div>
+            <div class="row feature_inner text-dark font-weight-bold">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature_item">
+                        <p><i class="lnr lnr-bus mr-2" style="font-size: 1.5rem"></i>Собственный обширный автопарк.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature_item">
+                        <p><i class="lnr lnr-bus mr-2" style="font-size: 1.5rem"></i>Автотранспорт, на сто процентов
+                            подготовленный к очередному рейсу.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature_item">
+                        <p><i class="lnr lnr-bus mr-2" style="font-size: 1.5rem"></i>Слаженная работа отдела логистики.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature_item">
+                        <p><i class="lnr lnr-bus mr-2" style="font-size: 1.5rem"></i>Быстрая обработка заявок.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature_item">
+                        <p><i class="lnr lnr-bus mr-2" style="font-size: 1.5rem"></i>Работа в выходные и праздники.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature_item">
+                        <p><i class="lnr lnr-bus mr-2" style="font-size: 1.5rem"></i>Внимание к пожеланиям клиента.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Feature Area =================-->
+
+    <!--================Testimonials Area =================-->
+    <section class="testimonials_area p_120">
+        <div class="container">
+            <div class="row testimonials_inner">
+                <div class="col-lg-12">
+                    <h3 class="p-2 text-white">Форма для связи</h3>
+                    {% if form_feedback_is_send %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Спасибо за сообщение!</strong> Оно будет обязательно рассмотрено.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                    {{ form_start(form_feedback, {'attr': {'class': 'row contact-form'}}) }}
+                    {{ form_errors(form_feedback) }}
+                    <div class="col-md-5 col-sm-12">
+                        <div class="form-group">
+                            {{ form_widget(form_feedback.nameclient, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form_feedback.nameclient) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form_feedback.mail, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form_feedback.mail) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form_feedback.title, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form_feedback.title) }}
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-12">
+                        <div class="form-group">
+                            {{ form_widget(form_feedback.content, {'attr': {'class': 'form-control', 'style': 'min-height: 150px'}}) }}
+                            {{ form_errors(form_feedback.content) }}
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" value="submit" class="btn submit_btn">Отправить сообщение</button>
+                        </div>
+                    </div>
+                    {{ form_end(form_feedback) }}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Testimonials Area =================-->
+{% endblock %}

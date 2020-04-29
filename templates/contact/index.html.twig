@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block header_links %}
+
+{% endblock %}
+
+{% block body %}
+    {% for msg in messages %}
+        {{ msg.title }}
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends 'index_admin/base_admin.html.twig' %}
+
+{% block title %}{{ parent() }} - Обратная связь{% endblock %}
+
+{% block stylesheets %}
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('vendors/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+
+    {{ parent() }}
+{% endblock %}
+
+{% block sidebar_menu %}
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+            data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+            <li class="nav-item">
+                <a href="{{ path('index_admin') }}" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                        Начальная страница
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('admin_feedback') }}" class="nav-link active">
+                    <i class="nav-icon fas fa-envelope-open-text"></i>
+                    <p>
+                        Обратная связь
+                    </p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
+
+{% block content_wrapper_header %}
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Обратная связь</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('index_admin') }}">Главная</a></li>
+                        <li class="breadcrumb-item active">Обратная связь</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+{% endblock %}
+
+{% block content_wrapper_main %}
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="table-feedback" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Имя</th>
+                                <th>Тема сообщения</th>
+                                <th>Почта</th>
+                                <th>Сообщение</th>
+                                <th>Дата и время</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for msg in messages %}
+                                <tr>
+                                    <td>{{ msg.nameclient }}</td>
+                                    <td>{{ msg.title }}</td>
+                                    <td>{{ msg.mail }}</td>
+                                    <td>{{ msg.content }}</td>
+                                    <td>{{ msg.createdAt | date }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Имя</th>
+                                <th>Тема сообщения</th>
+                                <th>Почта</th>
+                                <th>Сообщение</th>
+                                <th>Дата и время</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+{% endblock %}
+
+{% block main_scripts %}
+    <!-- DataTables -->
+    <script src="{{ asset('vendors/admin/plugins/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('vendors/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('vendors/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('vendors/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+
+    {{ parent() }}
+
+    <!-- AdminLTE for demo purposes -->
+{#    <script src="{{ asset('js/admin/demo.js') }}"></script>#}
+    <!-- page script -->
+    <script>
+        $(function () {
+            $("#table-feedback").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+                "language": {
+                    "infoEmpty": "Совпадающих записей не найдено",
+                    "infoFiltered": " - отфильтровано <b>_MAX_</b> записей",
+                    "emptyTable": "Данные отсутствуют в таблице",
+                    "paginate": {
+                        "previous": "Назад",
+                        "next": "Вперед",
+                        "last": "В конец",
+                        "first": "В начало"
+                    },
+                    "lengthMenu": "Показать _MENU_ сообщений на странице",
+                    "sInfo": "Показаны сообщения с _START_ по _END_ из   _TOTAL_ entries",
+                    "sSearch": "Поиск:"
+                },
+                "order": [[4, "desc"]],
+                "columns": [
+                    { "width": "10%" },
+                    { "width": "15%" },
+                    { "width": "15%" },
+                    { "width": "45%" },
+                    { "width": "15%" },
+                ],
+            });
+        });
+    </script>
+{% endblock %}

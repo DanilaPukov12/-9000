@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Документы{% endblock %}
+
+{% block body %}
+    <!--================Home Banner Area =================-->
+    <section class="preview_area">
+        <div class="preview_inner d-flex align-items-center">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
+                 data-background=""></div>
+            <div class="container">
+                <div class="preview_content">
+                    <div class="page_link">
+                        <a href="{{ path("index") }}">Главная</a>
+                        {#                        <a href="{{ path("documentation") }}">Документы</a>#}
+                    </div>
+                    <h2>Нормативные документы</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+    <!--================Feature Area =================-->
+    <section class="feature_area p-5">
+        <div class="container">
+            <div class="row feature_inner">
+                <div class="col-lg-6">
+                    <div class="feature_item text-right">
+                        <h4 class="text-left"><i class="lnr lnr-license"></i>Положение об автовокзале МУП «ЭКСПРЕСС»
+                            г.Дзержинск</h4>
+                        <a href="{{ asset("documentation/pravila_polzovaniy_uslugami.pdf") }}"
+                           class="genric-btn info radius" target="_blank" title="Правила пользования услугами">
+                            Скачать
+                            <i class="lnr lnr-download ml-2" style="font-size: 1rem"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Feature Area =================-->
+{% endblock %}

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{{ asset('img/favicon.ico') }}" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+    <title>{% block title %}МУП Экспресс г.Дзержинск{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset("css/bootstrap.css") }}">
+
+        <!-- стилизация иконок -->
+        <link rel="stylesheet" href="{{ asset("vendors/linericon/style.css") }}">
+        <link rel="stylesheet" href="{{ asset("css/font-awesome.min.css") }}">
+
+        <!-- Стилизация каруселей -->
+        <link rel="stylesheet" href="{{ asset("vendors/owl-carousel/owl.carousel.min.css") }}">
+
+        {#        <!-- стилизация картинок??? -->#}
+        {#        <link rel="stylesheet" href="{{ asset("vendors/lightbox/simpleLightbox.css") }}">#}
+
+        <!-- стилизация выпадающих списков -->
+        <link rel="stylesheet" href="{{ asset("vendors/nice-select/css/nice-select.css") }}">
+
+        {#        <!-- css анимации -->#}
+        {#        <link rel="stylesheet" href="{{ asset("vendors/animate-css/animate.css") }}">#}
+
+        <link rel="stylesheet" href="{{ asset("vendors/jquery-ui/jquery-ui.css") }}">
+
+        <!-- main css -->
+        <link rel="stylesheet" href="{{ asset("css/style.css") }}">
+        <link rel="stylesheet" href="{{ asset("css/responsive.css") }}">
+    {% endblock %}
+</head>
+<body>
+{% block header %}
+    <!--================Header Menu Area =================-->
+    <header class="header_area">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a class="navbar-brand logo_h" href="{{ path("index") }}">
+                        <img src="{{ asset('img/logo.png') }}" height="58" alt="МУП Экспресс">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            {% block header_links %}
+                                <li class="nav-item {{ is_home ?? '' }} ">
+                                    <a class="nav-link" href="{{ path("index") }}">Главная</a></li>
+                                <li class="nav-item {{ is_routes ?? '' }}">
+                                    <a class="nav-link " href="{{ path("routes") }}">Маршруты</a>
+                                </li>
+                                <li class="nav-item {{ is_services ?? '' }}">
+                                    <a class="nav-link " href="{{ path("services") }}">Услуги</a>
+                                </li>
+                                <li class="nav-item {{ is_about ?? '' }} submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true" aria-expanded="false">О компании</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item"><a class="nav-link" href="{{ path("about") }}">О
+                                                предприятии</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ path("executives") }}">Руководство</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ path("study") }}">Где
+                                                обучаемся</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ path("documentation") }}">Документы</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item {{ is_contacts ?? '' }}"><a class="nav-link"
+                                                                                href="{{ path("contacts") }}">Контакты</a>
+                                </li>
+                            {% endblock %}
+                        </ul>
+                        <button type="button" class="genric-btn danger radius header-btn_right" title="Заказать автобус"
+                                style="font-size: 1rem" data-toggle="modal" data-target="#exampleModalCenter">
+                            Заказать автобус
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--================Header Menu Area =================-->
+{% endblock %}
+
+{% block body %}{% endblock %}
+
+{% block footer %}
+    <!--================ start footer Area  =================-->
+    <footer class="footer-area p-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-6 col-sm-12 mb-5">
+                    <a class="navbar-brand logo_h" href="{{ path('index') }}">
+                        <img src="{{ asset('img/logo.png') }}" height="58" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-5">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">О нас</h6>
+                        <p>Предприятие "МУП "ЭКСПРЕСС" зарегистрирована 14 мая 2003 года местным органом ФНС —
+                            Межрайонная инспекция Федеральной налоговой службы №15 по Нижегородской области. Полное
+                            официальное наименование — МУНИЦИПАЛЬНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ "ЭКСПРЕСС" Г. ДЗЕРЖИНСК.</p>
+                    </div>
+                </div>
+                <div class="offset-lg-2 col-lg-4 offset-md-0 col-md-6 col-sm-12">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">Контакты</h6>
+                        <ul class="footer_links">
+                            <li class="footer_links_item"><a href="tel:+78313264875"><i class="fa fa-phone"></i>Приемная
+                                    - 8 (8313) 26-48-75</a></li>
+                            <li class="footer_links_item"><a href="tel:+78313262875"><i class="fa fa-phone"></i>Бухгалтерия
+                                    – 8 (8313) 26-28-75</a></li>
+                            <li class="footer_links_item"><a href="tel:+78313264317"><i class="fa fa-phone"></i>Отдел
+                                    кадров – 8 (8313) 26-43-17</a></li>
+                            <li class="footer_links_item"><a href="tel:+78313254130"><i class="fa fa-phone"></i>Коммерчерский
+                                    отдел – 8 (8313) 25-41-30</a></li>
+                            <li class="footer_links_item"><a href="mailto:dttu@rambler.ru"><i class="fa fa-at"></i>Mail:
+                                    dttu@rambler.ru</a></li>
+                            <li class="footer_links_item"><a href="https://goo.gl/maps/zhSHX8Rb3onaHZQH6"
+                                                             target="_blank"><i class="fa fa-map-marker"></i>г.
+                                    Дзержинск, Нижегородское шоссе, 5</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row footer-bottom d-flex justify-content-between align-items-center">
+                <p class="col-lg-12 footer-text text-center">
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                    Все права защищены
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!--================ End footer Area  =================-->
+{% endblock %}
+
+{% block modals %}
+    <!--================ Modal order window ===================-->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle">Заказать автобус</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('index') }}" id="order-bus" method="post">
+                        <div class="form-group text-left">
+                            <label class="mb-0" for="fio">Ф.И.О:</label>
+                            <input class="form-control mb-2 text-secondary" type="text" name="fio" placeholder="Ф.И.О."
+                                   required>
+                        </div>
+                        <div class="form-group text-left">
+                            <label class="mb-0" for="fio">Откуда едем (адрес, место)</label>
+                            <input class="form-control mb-2 text-secondary" type="text" name="fio" placeholder="Откуда едем (адрес, место)"
+                                   required>
+                        </div>
+                        <div class="form-group text-left">
+                            <label class="mb-0" for="fio">Куда едем (адрес, место</label>
+                            <input class="form-control mb-2 text-secondary" type="text" name="fio" placeholder="Куда едем (адрес, место"
+                                   required>
+                        </div>
+
+
+                        <div class="form-group text-left">
+                            <label class="mb-0" for="dateOt">Дата:</label>
+                            <input class="form-control mb-2 text-secondary" id="dateOt" type="date" name="date">
+                        </div>
+
+                        <div class="form-group text-left">
+                            <label class="mb-0" for="telephone">Врямя отправления:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="font-size: 0.99rem"><i class="fa fa-clock-o"></i></span>
+                                </div>
+                                <input type="time" class="form-control text-secondary"
+                                       name="timeAt">
+                            </div>
+                        </div>
+
+                        <div class="form-group text-left">
+                            <label class="mb-0" for="telephone">Время прибытия:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="font-size: 0.99rem"><i class="fa fa-clock-o"></i></span>
+                                </div>
+                                <input type="time" class="form-control text-secondary"
+                                       name="timeTo">
+                            </div>
+                        </div>
+
+                        <div class="form-group text-left">
+                            <label class="mb-0" for="inputEmail">Email:</label>
+                            <input type="email" class="form-control mb-2 text-secondary" id="inputEmail"
+                                   aria-describedby="email" name="email" placeholder="Email">
+                        </div>
+
+                        <div class="form-group text-left">
+                            <label class="mb-0" for="telephone">Телефон:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="font-size: 0.99rem">+7</span>
+                                </div>
+                                <input type="tel" class="form-control text-secondary" placeholder="(555)-555-55-55"
+                                       name="phone" id="telephone">
+                            </div>
+                        </div>
+
+                        <div class="form-group text-left">
+                            <label class="mb-0" for="numberPeople">Кол-во чел.:</label>
+                            <input type="number" class="form-control mb-2 text-secondary" id="numberPeople" name="number"
+                                   placeholder="0">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn close_btn" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn submit_btn" form="order-bus">Отправить заявку</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================ End Modal order window ===============-->
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ asset("js/jquery-3.2.1.min.js") }}"></script>
+
+    <!-- Popper js - выпадающие сосбщения -->
+    <script src="{{ asset("js/popper.js") }}"></script>
+    <script src="{{ asset("js/bootstrap.min.js") }}"></script>
+
+    <!-- stellar для параллакс эффекта -->
+    <script src="{{ asset("js/stellar.js") }}"></script>
+
+    {#    <!-- скрипт для работы стилизации картинок??? -->#}
+    {#    <script src="{{ asset("vendors/lightbox/simpleLightbox.min.js") }}"></script>#}
+
+    <!-- скрипт для работы выпадающих списков -->
+    <script src="{{ asset("vendors/nice-select/js/jquery.nice-select.min.js") }}"></script>
+
+    {#    <!-- скрипты для работы с картинками ??? -->#}
+    <script src="{{ asset("vendors/isotope/imagesloaded.pkgd.min.js") }}"></script>
+    <script src="{{ asset("vendors/isotope/isotope-min.js") }}"></script>
+
+    <!-- Скрипт для работы каруселей -->
+    <script src="{{ asset("vendors/owl-carousel/owl.carousel.min.js") }}"></script>
+
+    <script src="{{ asset("vendors/jquery-ui/jquery-ui.js") }}"></script>
+
+    <!-- Скрипт для редактирования форм -->
+    <script src="{{ asset("js/jquery.ajaxchimp.min.js") }}"></script>
+{% endblock %}
+
+{% block basejs %}
+    <!-- Пользовательские скрипты -->
+    <script src="{{ asset("js/theme.js") }}"></script>
+{% endblock %}
+</body>
+</html>

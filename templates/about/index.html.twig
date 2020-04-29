@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - О нас{% endblock %}
+
+{% block body %}
+    <!--================Home Banner Area =================-->
+    <section class="preview_area">
+        <div class="preview_inner d-flex align-items-center">
+            <div class="overlay bg-parallax" data-stellarb-ratio="0.9" data-stellar-vertical-offset="0"
+                 data-background=""></div>
+            <div class="container">
+                <div class="preview_content">
+                    <div class="page_link">
+                        <a href="{{ path("index") }}">Главная</a>
+                        <a href="{{ path("about") }}">О ПРЕДПРИЯТИИ</a>
+                    </div>
+                    <h2>О нас</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+    <!--================Welcome Area =================-->
+    <section class="welcome_area">
+        <div class="container">
+            <div class="row welcome_inner">
+                <div class="col-lg-6">
+                    <div class="welcome_img">
+                        <img class="img-fluid" src="{{ asset('img/about/busmen.jpg') }}" alt="Фото с автобусами">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="welcome_text">
+                        <h4>О компании МУП "Экпресс"</h4>
+                        <p>
+                            Предприятие "МУП "ЭКСПРЕСС" зарегистрирована 14 мая 2003 года местным органом ФНС —
+                            Межрайонная инспекция Федеральной налоговой службы №15 по Нижегородской области. Полное
+                            официальное наименование — МУНИЦИПАЛЬНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ "ЭКСПРЕСС" Г. ДЗЕРЖИНСК
+                        </p>
+                        <p>
+                            Компании были присвоены <b>ОГРН 1035200519122 и ИНН 5249006828.</b> Юридический адрес:
+                            606010,
+                            Нижегородская область, г. Дзержинск, шоссе Нижегородское, дом 5.
+                        </p>
+                        <p>
+                            Организационно-правовая форма — унитарные предприятия, основанные на праве хозяйственного
+                            ведения.
+                        </p>
+                        <p>
+                            Тип собственности — муниципальная собственность.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Welcome Area =================-->
+
+    <!--================Welcome Area =================-->
+    <section class="welcome_area p_120">
+        <div class="container">
+            <div class="row welcome_inner">
+                <div class="col-lg-6">
+                    <div class="welcome_text">
+                        <h4>Основные виды деятельности</h4>
+                        <p>
+                            <b>Основным видом деятельности является:</b> "Регулярные перевозки пассажиров троллейбусами в
+                            городском и пригородном сообщении".
+                        </p>
+                        <b>Организация также зарегистрирована в таких категориях, как:</b>
+                        <ul class="unordered-list">
+                            <li>Строительство жилых и нежилых зданий</li>
+                            <li>Техническое обслуживание и ремонт легковых автомобилей и легких грузовых автотранспортных средств</li>
+                            <li>Техническое обслуживание и ремонт прочих автотранспортных средств</li>
+                            <li>Торговля автомобильными деталями, узлами и принадлежностями</li>
+                            <li>Регулярные перевозки пассажиров автобусами в городском и пригородном сообщении</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="welcome_img">
+                        <img class="img-fluid" src="{{ asset('img/about/bus.jpg') }}" alt="Фото с автобусами">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Welcome Area =================-->
+{% endblock %}
+

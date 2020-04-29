@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Руководство{% endblock %}
+
+{% block body %}
+    <!--================Home Banner Area =================-->
+    <section class="preview_area">
+        <div class="preview_inner d-flex align-items-center">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
+                 data-background=""></div>
+            <div class="container">
+                <div class="preview_content">
+                    <div class="page_link">
+                        <a href="{{ path("index") }}">Главная</a>
+                        <a href="{{ path("executives") }}">Руководство</a>
+                    </div>
+                    <h2>Руководство МУП «ЭКСПРЕСС»</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+    <!--================Team Area =================-->
+    <section class="team_area p_120">
+        <div class="container">
+            <div class="row team_inner">
+                <div class="col-lg-3 col-sm-6 mb-5">
+                    <div class="team_item">
+                        <img class="img-fluid" src="{{ asset('img/team/team-1.jpg') }}" alt="">
+                        <div class="team_name">
+                            <h4>Садкова Наталья Вячеславовна</h4>
+                            <p>Период руководства: <br> 18.01.2019</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-5">
+                    <div class="team_item">
+                        <img class="img-fluid" src="{{ asset('img/team/team-2.jpg') }}" alt="">
+                        <div class="team_name">
+                            <h4>Медведев Александр Афанасьевич</h4>
+                            <p>Период руководства: <br> D24.10.2017-11.01.2019</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-5">
+                    <div class="team_item">
+                        <img class="img-fluid" src="{{ asset('img/team/team-3.jpg') }}" alt="">
+                        <div class="team_name">
+                            <h4>Панюшкина Лилия Александровна</h4>
+                            <p>Период руководства: <br> 01.02.2017-18.10.2017</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-5">
+                    <div class="team_item">
+                        <img class="img-fluid" src="{{ asset('img/team/team-4.jpg') }}" alt="">
+                        <div class="team_name">
+                            <h4>Шахунц Юрий Владимирович</h4>
+                            <p>Период руководства: <br> 07.06.2016-23.01.2017</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-5">
+                    <div class="team_item">
+                        <img class="img-fluid" src="{{ asset('img/team/team-5.jpg') }}" alt="">
+                        <div class="team_name">
+                            <h4>Небученых Николай Васильевич</h4>
+                            <p>Период руководства: <br> 18.12.2015-31.05.2016</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-5">
+                    <div class="team_item">
+                        <img class="img-fluid" src="{{ asset('img/team/team-6.jpg') }}" alt="">
+                        <div class="team_name">
+                            <h4>Глитняк Игорь Евгеньевич</h4>
+                            <p>Период руководства: <br> 02.04.2013-16.12.2015</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-5">
+                    <div class="team_item">
+                        <img class="img-fluid" src="{{ asset('img/team/team-7.jpg') }}" alt="">
+                        <div class="team_name">
+                            <h4>Патрин Роман Евгеньевич</h4>
+                            <p>Период руководства: <br> 08.11.2011-01.04.2013</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-5">
+                    <div class="team_item">
+                        <img class="img-fluid" src="{{ asset('img/team/team-9.jpg') }}" alt="">
+                        <div class="team_name">
+                            <h4>Кузьмин Евгений Георгиевич</h4>
+                            <p>Период руководства: <br> 09.03.2011-07.11.2011</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-5">
+                    <div class="team_item">
+                        <img class="img-fluid" src="{{ asset('img/team/team-2.jpg') }}" alt="">
+                        <div class="team_name">
+                            <h4>Медведев Александр Афанасьевич</h4>
+                            <p>Период руководства: <br> 21.04.2003-27.01.2011</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Team Area =================-->
+{% endblock %}
+
