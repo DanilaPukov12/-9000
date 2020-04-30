@@ -13,7 +13,9 @@ class IndexAdminController extends AbstractController
      */
     public function index()
     {
-        return $this->render('index_admin/index/index.html.twig');
+        return $this->render('index_admin/index/index.html.twig', [
+            'is_admin_index' => 'active'
+        ]);
     }
 
     /**
@@ -26,6 +28,7 @@ class IndexAdminController extends AbstractController
 
         return $this->render('index_admin/index/feedback.html.twig', [
             'messages' => $messages,
+            'is_admin_feedback' => 'active'
         ]);
     }
 }

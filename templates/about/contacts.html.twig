@@ -76,32 +76,7 @@
                 </div>
             </div>
             <h3 class="p-2 text-dark">Форма для связи</h3>
-            <form class="row contact_form" action="contact_process.php" method="post" id="contactForm"
-                  novalidate="novalidate">
-                <div class="col-md-5 col-sm-12">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="name" name="name"
-                               placeholder="Введите ваше имя">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="email" name="email"
-                               placeholder="Введите ваш email адрес">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="subject" name="subject"
-                               placeholder="Введите тему сообщения">
-                    </div>
-                </div>
-                <div class="col-md-7 col-sm-12">
-                    <div class="form-group">
-                        <textarea class="form-control" name="message" id="message" rows="1"
-                                  placeholder="Введите ваше сообщение"></textarea>
-                    </div>
-                </div>
-                <div class="col-md-12 text-right">
-                    <button type="submit" value="submit" class="btn submit_btn">Отправить сообщение</button>
-                </div>
-            </form>
+            {% include "modules/forms/feedback.html.twig" %}
         </div>
     </section>
     <!--================ End Contact Area =================-->

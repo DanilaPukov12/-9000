@@ -2,7 +2,6 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="{{ asset('img/favicon.ico') }}" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
@@ -22,7 +21,7 @@
         {#        <link rel="stylesheet" href="{{ asset("vendors/lightbox/simpleLightbox.css") }}">#}
 
         <!-- стилизация выпадающих списков -->
-        <link rel="stylesheet" href="{{ asset("vendors/nice-select/css/nice-select.css") }}">
+        {#        <link rel="stylesheet" href="{{ asset("vendors/nice-select/css/nice-select.css") }}">#}
 
         {#        <!-- css анимации -->#}
         {#        <link rel="stylesheet" href="{{ asset("vendors/animate-css/animate.css") }}">#}
@@ -53,41 +52,8 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav menu_nav ml-auto">
-                            {% block header_links %}
-                                <li class="nav-item {{ is_home ?? '' }} ">
-                                    <a class="nav-link" href="{{ path("index") }}">Главная</a></li>
-                                <li class="nav-item {{ is_routes ?? '' }}">
-                                    <a class="nav-link " href="{{ path("routes") }}">Маршруты</a>
-                                </li>
-                                <li class="nav-item {{ is_services ?? '' }}">
-                                    <a class="nav-link " href="{{ path("services") }}">Услуги</a>
-                                </li>
-                                <li class="nav-item {{ is_about ?? '' }} submenu dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                                       aria-haspopup="true" aria-expanded="false">О компании</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item"><a class="nav-link" href="{{ path("about") }}">О
-                                                предприятии</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="{{ path("executives") }}">Руководство</a>
-                                        </li>
-                                        <li class="nav-item"><a class="nav-link" href="{{ path("study") }}">Где
-                                                обучаемся</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="{{ path("documentation") }}">Документы</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item {{ is_contacts ?? '' }}"><a class="nav-link"
-                                                                                href="{{ path("contacts") }}">Контакты</a>
-                                </li>
-                            {% endblock %}
-                        </ul>
-                        <button type="button" class="genric-btn danger radius header-btn_right" title="Заказать автобус"
-                                style="font-size: 1rem" data-toggle="modal" data-target="#exampleModalCenter">
-                            Заказать автобус
-                        </button>
-                    </div>
+                    {% include 'modules/header.menu.html.twig' %}
+
                 </div>
             </nav>
         </div>
@@ -149,7 +115,9 @@
 
 {% block modals %}
     <!--================ Modal order window ===================-->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -159,81 +127,78 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ path('index') }}" id="order-bus" method="post">
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="fio">Ф.И.О:</label>
-                            <input class="form-control mb-2 text-secondary" type="text" name="fio" placeholder="Ф.И.О."
-                                   required>
+                    {% for message in app.flashes('form.order.success') %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="fio">Откуда едем (адрес, место)</label>
-                            <input class="form-control mb-2 text-secondary" type="text" name="fio" placeholder="Откуда едем (адрес, место)"
-                                   required>
-                        </div>
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="fio">Куда едем (адрес, место</label>
-                            <input class="form-control mb-2 text-secondary" type="text" name="fio" placeholder="Куда едем (адрес, место"
-                                   required>
-                        </div>
-
-
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="dateOt">Дата:</label>
-                            <input class="form-control mb-2 text-secondary" id="dateOt" type="date" name="date">
-                        </div>
-
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="telephone">Врямя отправления:</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" style="font-size: 0.99rem"><i class="fa fa-clock-o"></i></span>
-                                </div>
-                                <input type="time" class="form-control text-secondary"
-                                       name="timeAt">
+                    {% endfor %}
+                    {{ form_start(form_order, {'attr': {'id': form_order.vars.id, 'action': path("order")}}) }}
+                    <div class="form-group">
+                        {{ form_label(form_order.name, null, {'label_attr': {'class': 'mb-0'}}) }}
+                        {{ form_widget(form_order.name, {'attr': {'class': 'form-control mb-2 text-secondary'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form_order.address_from, null, {'label_attr': {'class': 'mb-0'}}) }}
+                        {{ form_widget(form_order.address_from, {'attr': {'class': 'form-control mb-2 text-secondary'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form_order.address_at, null, {'label_attr': {'class': 'mb-0'}}) }}
+                        {{ form_widget(form_order.address_at, {'attr': {'class': 'form-control mb-2 text-secondary'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form_order.date, null, {'label_attr': {'class': 'mb-0'}}) }}
+                        {{ form_widget(form_order.date, {'attr': {'class': 'form-control text-secondary '}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form_order.time_from, null, {'label_attr': {'class': 'mb-0'}}) }}
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text" style="font-size: 0.99rem">
+                                        <i class="fa fa-clock-o"></i></span>
                             </div>
+                            {{ form_widget(form_order.time_from, {'attr': {'class': 'form-control text-secondary'}}) }}
                         </div>
-
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="telephone">Время прибытия:</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" style="font-size: 0.99rem"><i class="fa fa-clock-o"></i></span>
-                                </div>
-                                <input type="time" class="form-control text-secondary"
-                                       name="timeTo">
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form_order.time_at, null, {'label_attr': {'class': 'mb-0'}}) }}
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text" style="font-size: 0.99rem">
+                                        <i class="fa fa-clock-o"></i></span>
                             </div>
+                            {{ form_widget(form_order.time_at, {'attr': {'class': 'form-control text-secondary'}}) }}
                         </div>
-
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="inputEmail">Email:</label>
-                            <input type="email" class="form-control mb-2 text-secondary" id="inputEmail"
-                                   aria-describedby="email" name="email" placeholder="Email">
-                        </div>
-
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="telephone">Телефон:</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" style="font-size: 0.99rem">+7</span>
-                                </div>
-                                <input type="tel" class="form-control text-secondary" placeholder="(555)-555-55-55"
-                                       name="phone" id="telephone">
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form_order.email, null, {'label_attr': {'class': 'mb-0'}}) }}
+                        {{ form_widget(form_order.email, {'attr': {'class': 'form-control mb-2 text-secondary'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form_order.phone, null, {'label_attr': {'class': 'mb-0'}}) }}
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="font-size: 0.99rem">+7</span>
                             </div>
+                            {{ form_widget(form_order.phone, {'attr': {'class': 'form-control text-secondary'}}) }}
                         </div>
-
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="numberPeople">Кол-во чел.:</label>
-                            <input type="number" class="form-control mb-2 text-secondary" id="numberPeople" name="number"
-                                   placeholder="0">
-                        </div>
-                    </form>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form_order.number, null, {'label_attr': {'class': 'mb-0'}}) }}
+                        {{ form_widget(form_order.number, {'attr': {'class': 'form-control mb-2 text-secondary'}}) }}
+                    </div>
+                    {{ form_end(form_order) }}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn close_btn" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn submit_btn" form="order-bus">Отправить заявку</button>
+                    <button type="submit" class="btn submit_btn" form="{{ form_order.vars.id }}">Отправить заявку
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!--================ End Modal order window ===============-->
 {% endblock %}

@@ -21,84 +21,15 @@
     </section>
     <!--================End Home Banner Area =================-->
 
-    <!--================Welcome Area =================-->
     <section class="p-5">
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <form action="{{ path('index') }}" id="order-bus" method="post">
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="fio">Ф.И.О:</label>
-                            <input class="form-control mb-2 text-secondary" type="text" name="fio" placeholder="Ф.И.О."
-                                   required>
-                        </div>
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="fio">Откуда едем (адрес, место)</label>
-                            <input class="form-control mb-2 text-secondary" type="text" name="fio" placeholder="Откуда едем (адрес, место)"
-                                   required>
-                        </div>
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="fio">Куда едем (адрес, место</label>
-                            <input class="form-control mb-2 text-secondary" type="text" name="fio" placeholder="Куда едем (адрес, место"
-                                   required>
-                        </div>
-
-
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="dateOt">Дата:</label>
-                            <input class="form-control mb-2 text-secondary" id="dateOt" type="date" name="date">
-                        </div>
-
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="telephone">Врямя отправления:</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" style="font-size: 0.99rem"><i class="fa fa-clock-o"></i></span>
-                                </div>
-                                <input type="time" class="form-control text-secondary"
-                                       name="timeAt">
-                            </div>
-                        </div>
-
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="telephone">Время прибытия:</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" style="font-size: 0.99rem"><i class="fa fa-clock-o"></i></span>
-                                </div>
-                                <input type="time" class="form-control text-secondary"
-                                       name="timeTo">
-                            </div>
-                        </div>
-
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="inputEmail">Email:</label>
-                            <input type="email" class="form-control mb-2 text-secondary" id="inputEmail"
-                                   aria-describedby="email" name="email" placeholder="Email">
-                        </div>
-
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="telephone">Телефон:</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" style="font-size: 0.99rem">+7</span>
-                                </div>
-                                <input type="tel" class="form-control text-secondary" placeholder="(555)-555-55-55"
-                                       name="phone" id="telephone">
-                            </div>
-                        </div>
-
-                        <div class="form-group text-left">
-                            <label class="mb-0" for="numberPeople">Кол-во чел.:</label>
-                            <input type="number" class="form-control mb-2 text-secondary" id="numberPeople" name="number"
-                                   placeholder="0">
-                        </div>
-
-                        <button type="submit" class="btn submit_btn float-right">Отправить заявку</button>
-                    </form>
+                    <pre>Данная страница находится в разработке</pre>
+                    {{ form_start(form_order2, {'attr': {'action': path("order")}}) }}
+                    {{ form_end(form_order2) }}
                 </div>
             </div>
         </div>
     </section>
-    <!--================End Welcome Area =================-->
 {% endblock %}

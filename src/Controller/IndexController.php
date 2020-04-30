@@ -2,45 +2,36 @@
 
 namespace App\Controller;
 
-use App\Entity\ContactFeedback;
 use App\Form\ContactFeedbackType;
+use App\Form\OrderType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\VarDumper\VarDumper;
 
 class IndexController extends AbstractController
 {
-    private $session;
-
-    public function __construct(SessionInterface $session)
-    {
-        $this->session = $session;
-    }
-
     /**
      * @Route("/", name="index")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
      */
-    public function index(Request $request)
+    public function index(Request $request, EntityManagerInterface $em)
     {
-        $contactFeedback = new ContactFeedback();
-        $formFeedback = $this->createForm(ContactFeedbackType::class, $contactFeedback);
-
+        $formFeedback = $this->createForm(ContactFeedbackType::class);
         $formFeedback->handleRequest($request);
 
-        $formFeedbackIsSend = $this->session->get('form_feedback_is_send') ?? false;
-        $this->session->remove('form_feedback_is_send');
 
-        if ($formFeedback->isSubmitted() && $formFeedback->isValid()) {
-            $contactFeedback = $formFeedback->getData();
-            $contactFeedback->setCreatedAt(new \DateTime('now'));
+        if($formFeedback->isSubmitted() && $formFeedback->isValid()) {
+            $feedback = $formFeedback->getData();
 
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($contactFeedback);
+            $em->persist($feedback);
             $em->flush();
 
-            $this->session->set('form_feedback_is_send', true);
+            $this->addFlash('form.feedback.success', "Спасибо за сообщение! Оно будет обязательно рассмотрено");
 
             return $this->redirectToRoute('index');
         }
@@ -48,7 +39,7 @@ class IndexController extends AbstractController
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
             'form_feedback' => $formFeedback->createView(),
-            'form_feedback_is_send' => $formFeedbackIsSend,
+            'form_order' => $this->createForm(OrderType::class)->createView(),
             'is_home' => 'active'
         ]);
     }
