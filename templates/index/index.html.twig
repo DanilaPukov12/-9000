@@ -58,6 +58,10 @@
     </section>
     <!--================End Home Banner Area =================-->
 
+    <!--================Section Calc Area ====================-->
+    {% include "modules/section.calc.html.twig" %}
+    <!--================End Section Calc Area ================-->
+
 
     <!--================Feature Area =================-->
     <section class="feature_area p_120">
@@ -115,4 +119,11 @@
         </div>
     </section>
     <!--================End Testimonials Area =================-->
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset("js/calc.js") }}"></script>
 {% endblock %}

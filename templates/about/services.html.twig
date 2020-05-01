@@ -21,15 +21,14 @@
     </section>
     <!--================End Home Banner Area =================-->
 
-    <section class="p-5">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <pre>Данная страница находится в разработке</pre>
-                    {{ form_start(form_order2, {'attr': {'action': path("order")}}) }}
-                    {{ form_end(form_order2) }}
-                </div>
-            </div>
-        </div>
-    </section>
+    <!--================Section Calc Area ====================-->
+    {% include "modules/section.calc.html.twig" %}
+    <!--================End Section Calc Area ================-->
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset("js/calc.js") }}"></script>
 {% endblock %}

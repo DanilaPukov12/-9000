@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\ContactFeedbackType;
 use App\Form\OrderType;
+use App\Services\FeedbackMailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,7 +67,7 @@ class AboutController extends AbstractController
      * @param EntityManagerInterface $em
      * @return Response
      */
-    public function contacts(Request $request, EntityManagerInterface $em)
+    public function contacts(Request $request, EntityManagerInterface $em, FeedbackMailer $mailer)
     {
         $formFeedback = $this->createForm(ContactFeedbackType::class);
         $formFeedback->handleRequest($request);
@@ -78,6 +79,8 @@ class AboutController extends AbstractController
             $em->flush();
 
             $this->addFlash('form.feedback.success', "Спасибо за сообщение! Оно будет обязательно рассмотрено");
+
+            $mailer->send($feedback);
 
             return $this->redirectToRoute('contacts');
         }

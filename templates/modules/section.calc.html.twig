@@ -1,0 +1,49 @@
+<section class="p-5">
+    <div class="container">
+        <div class="row" style="font-size: 1.2rem">
+            <div class="col-md-12">
+                <div class="h3 text-dark">Онлайн калькулятор стоимости перевозки</div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="type_transportation">Тип перевозки</label>
+                    <select class="wide nice-select-ext" id="type_transportation">
+                        <option value="no">Без выбора категории</option>
+                        <option value="children">Перевозка детей</option>
+                        <option value="employee">Перевозка сотрудников</option>
+                        <option value="passenger">Пассажирские перевозки</option>
+                        <option value="wedding">Свадьбы</option>
+                        <option value="funeral">Ритульные услуги</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-top: 60px">
+                    <label for="number_passenger">Количество пассажиров</label>
+                    <input class="form-control" id="number_passenger" type="number" value="10" min="0">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="select_transport">Транспортное средство</label>
+                    <select class="wide nice-select-ext" id="select_transport">
+                        <option value="no">Без выбора транспорта</option>
+                        <option value="paz">ПАЗ 320435-04</option>
+                        <option value="liaz">Лиаз 529365</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-top: 60px">
+                    <label for="number_hours">Количество часов аренды</label>
+                    <input class="form-control" id="number_hours" type="number" value="2" step="0.5" min="0">
+                </div>
+            </div>
+            <div class="col-md-6 display-4" style="font-size: 2rem">
+                <p>Итого: <span id="calc-number">0</span> руб.</p>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="genric-btn danger radius header-btn_right" title="Рассчитать стоимость"
+                        id="calc-cost-btn" style="font-size: 1rem">
+                    Рассчитать стоимость
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

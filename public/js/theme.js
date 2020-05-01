@@ -201,7 +201,9 @@
 
     mailChimp();
 
-    $('select').niceSelect();
+    if($('.nice-select-ext').length >= 1) {
+        $('.nice-select-ext').niceSelect();
+    }
 
     /*----------------------------------------------------*/
     /*  Simple LightBox js
