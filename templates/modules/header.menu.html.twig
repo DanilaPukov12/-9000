@@ -1,29 +1,29 @@
 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
     <ul class="nav navbar-nav menu_nav ml-auto">
         <li class="nav-item {{ is_home ?? '' }} ">
-            <a class="nav-link" href="{{ path("index") }}">Главная</a></li>
+            <a class="nav-link" href="{{ path("index") }}" title="Главная">Главная</a></li>
         <li class="nav-item {{ is_routes ?? '' }}">
-            <a class="nav-link " href="{{ path("routes") }}">Маршруты</a>
+            <a class="nav-link " href="{{ path("routes") }}" title="Маршруты">Маршруты</a>
         </li>
         <li class="nav-item {{ is_services ?? '' }}">
-            <a class="nav-link " href="{{ path("services") }}">Услуги</a>
+            <a class="nav-link " href="{{ path("services") }}" title="Услуги">Услуги</a>
         </li>
         <li class="nav-item {{ is_about ?? '' }} submenu dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-               aria-haspopup="true" aria-expanded="false">О компании</a>
+               aria-haspopup="true" aria-expanded="false" title="О компании">О компании</a>
             <ul class="dropdown-menu">
-                <li class="nav-item"><a class="nav-link" href="{{ path("about") }}">О
+                <li class="nav-item"><a class="nav-link" href="{{ path("about") }}" title="О предприятии">О
                         предприятии</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path("executives") }}">Руководство</a>
+                <li class="nav-item"><a class="nav-link" href="{{ path("executives") }}" title="Руководство">Руководство</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ path("study") }}">Где
+                <li class="nav-item"><a class="nav-link" href="{{ path("study") }}" title="Где обучаемся">Где
                         обучаемся</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path("documentation") }}">Документы</a>
+                <li class="nav-item"><a class="nav-link" href="{{ path("documentation") }}" title="Документы">Документы</a>
                 </li>
             </ul>
         </li>
-        <li class="nav-item {{ is_contacts ?? '' }}"><a class="nav-link"
-                                                        href="{{ path("contacts") }}">Контакты</a>
+        <li class="nav-item {{ is_contacts ?? '' }}">
+            <a class="nav-link" href="{{ path("contacts") }}" title="Контакты">Контакты</a>
         </li>
     </ul>
     <button type="button" class="genric-btn danger radius header-btn_right" title="Заказать автобус"
