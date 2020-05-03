@@ -7,7 +7,7 @@
     }
 
     const $transport_num_seats = {
-        'paz': 33,
+        'paz': 19,
         'liaz': 24
     }
     $('#calc-cost-btn').on('click', () => {
