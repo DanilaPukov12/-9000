@@ -76,7 +76,7 @@ class OrderType extends AbstractType
                 'required' => false
             ])
             ->add('is_confidentiality', CheckboxType::class, [
-                'required' => false
+                'required' => true
             ])
         ;
     }

@@ -27,7 +27,20 @@
             {{ form_widget(form_feedback.content, {'attr': {'class': 'form-control', 'style': 'min-height: 150px'}}) }}
             {{ form_errors(form_feedback.content) }}
         </div>
-        <div class="text-right">
+    </div>
+    <div class="col-md-7">
+        <div class="custom-control custom-checkbox text-justify">
+            {{ form_widget(form_feedback.is_confidentiality, {'attr': {'class': 'custom-control-input mb-2 text-secondary'}}) }}
+            <label class="custom-control-label mb-0 d-inline" for="{{ form_feedback.is_confidentiality.vars.id }}">Я даю согласие на обработку моих персональных данных в соответствии с Федеральным законом
+                от 27.07.2006 года №152-Ф3 "О персональных данных" на условиях и для целей, определенных в Согласии
+                на </label>
+            <a class="d-inline" href="{{ path('user_agreement') }}" title="">обработку персональных данных.</a>
+            {{ form_errors(form_feedback.is_confidentiality) }}
+
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="text-right mt-3 mt-md-0">
             <button type="submit" value="submit" class="btn submit_btn" title="Отправть сообщение">Отправить сообщение</button>
         </div>
     </div>

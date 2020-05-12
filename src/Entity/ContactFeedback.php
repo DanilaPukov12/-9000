@@ -56,6 +56,12 @@ class ContactFeedback
      */
     private $created_at;
 
+    /**
+     * @ORM\Column(type="boolean")
+     * @Assert\IsTrue(message="Это поле обязательно для заполенения")
+     */
+    private $is_confidentiality;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -117,6 +123,18 @@ class ContactFeedback
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getIsConfidentiality(): ?bool
+    {
+        return $this->is_confidentiality;
+    }
+
+    public function setIsConfidentiality(bool $is_confidentiality): self
+    {
+        $this->is_confidentiality = $is_confidentiality;
 
         return $this;
     }
