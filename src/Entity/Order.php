@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
@@ -68,6 +69,12 @@ class Order
      * @ORM\Column(type="datetime")
      */
     private $created_at;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Assert\IsTrue(message="Это поле обязательно для заполенения")
+     */
+    private $is_confidentiality;
 
     public function getId(): ?int
     {
@@ -190,6 +197,18 @@ class Order
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getIsConfidentiality(): ?bool
+    {
+        return $this->is_confidentiality;
+    }
+
+    public function setIsConfidentiality(bool $is_confidentiality): self
+    {
+        $this->is_confidentiality = $is_confidentiality;
 
         return $this;
     }

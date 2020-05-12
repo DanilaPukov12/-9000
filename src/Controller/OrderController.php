@@ -24,7 +24,7 @@ class OrderController extends AbstractController
         $formOrder = $this->createForm(OrderType::class);
         $formOrder->handleRequest($request);
 
-        if($formOrder->isSubmitted() && $formOrder->isValid()) {
+        if ($formOrder->isSubmitted() && $formOrder->isValid()) {
             $order = $formOrder->getData();
 
             $em->persist($order);
@@ -32,8 +32,20 @@ class OrderController extends AbstractController
 
             $this->addFlash('form.order.success', 'Спасибо! Мы ответим вам в ближайшее время.');
 
-            if($order->getEmail() !== null)
+            if ($order->getEmail() !== null)
                 $mailer->send($order);
+        } else {
+            $errors = [];
+            foreach ($formOrder as $fieldName => $formField) {
+                foreach ($formField->getErrors() as $error) {
+                    $errors['form.order.' . $fieldName . '.error'] = $error->getMessage();
+                }
+            }
+            if (!empty($errors)) {
+                foreach ($errors as $type => $message) {
+                    $this->addFlash($type, $message);
+                }
+            }
         }
 
         return $this->redirect($request->headers->get('referer'));

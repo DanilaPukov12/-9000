@@ -207,6 +207,21 @@
                         {{ form_label(form_order.number, null, {'label_attr': {'class': 'mb-0'}}) }}
                         {{ form_widget(form_order.number, {'attr': {'class': 'form-control mb-2 text-secondary'}}) }}
                     </div>
+                    <div class="custom-control custom-checkbox text-justify">
+                        {{ form_widget(form_order.is_confidentiality, {'attr': {'class': 'custom-control-input mb-2 text-secondary'}}) }}
+                        <label class="custom-control-label mb-0 d-inline" for="{{ form_order.is_confidentiality.vars.id }}">Я даю согласие на обработку моих персональных данных в соответствии с Федеральным законом
+                            от 27.07.2006 года №152-Ф3 "О персональных данных" на условиях и для целей, определенных в Согласии
+                            на </label>
+                        <a class="d-inline" href="{{ path('user_agreement') }}" title="">обработку персональных данных.</a>
+                        {% for message in app.flashes('form.order.is_confidentiality.error') %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    </div>
                     {{ form_end(form_order) }}
                 </div>
                 <div class="modal-footer">

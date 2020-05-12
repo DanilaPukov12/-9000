@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\VarDumper\VarDumper;
 
 class AboutController extends AbstractController
 {
@@ -98,13 +99,23 @@ class AboutController extends AbstractController
      */
     public function services()
     {
-        $formOrder2 = $this->createForm(OrderType::class);
-
-        return $this->render('about/services.html.twig', [
+         return $this->render('about/services.html.twig', [
             'controller_name' => 'AboutController',
             'form_order' => $this->createForm(OrderType::class)->createView(),
-            'form_order2' => $this->createForm(OrderType::class)->createView(),
             'is_services' => 'active'
+        ]);
+    }
+
+    /**
+     * @Route("/user-agreement", name="user_agreement")
+     * @param Request $request
+     * @return Response
+     */
+    public function userAgreement(Request $request) {
+        return $this->render('about/user-agreement.html.twig', [
+            'form_order' => $this->createForm(OrderType::class)->createView(),
+            'redirect_url' => $request->headers->get('referer'),
+            'is_about' => 'active'
         ]);
     }
 }

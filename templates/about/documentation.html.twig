@@ -14,7 +14,7 @@
                 <div class="preview_content">
                     <div class="page_link">
                         <a href="{{ path("index") }}">Главная</a>
-                        {#                        <a href="{{ path("documentation") }}">Документы</a>#}
+                        <a href="{{ path("documentation") }}">Документы</a>
                     </div>
                     <h2>Нормативные документы</h2>
                 </div>
@@ -27,6 +27,14 @@
     <section class="feature_area p-5">
         <div class="container">
             <div class="row feature_inner">
+                <div class="col-lg-6">
+                    <div class="feature_item text-right">
+                        <h4 class="text-left"><i class="lnr lnr-license"></i>Соглашение на обработку персональных данных</h4>
+                        <a href="{{ path('user_agreement') }}"
+                           class="genric-btn info radius" title="Соглашение на обработку персональных данных">
+                            Перейти</a>
+                    </div>
+                </div>
                 <div class="col-lg-6">
                     <div class="feature_item text-right">
                         <h4 class="text-left"><i class="lnr lnr-license"></i>Положение об автовокзале МУП «ЭКСПРЕСС»

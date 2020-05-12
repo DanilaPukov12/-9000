@@ -4201,3 +4201,13 @@ h6 {
 }
 
 /*---------------------------------------------------- */
+
+.custom-checkbox .custom-control-input, .custom-checkbox .custom-control-label {
+  cursor: pointer !important;
+}
+
+.mp-section-h4 {
+  color: #222222;
+  font-family: "Roboto", sans-serif;
+  font-size: 36px;
+}
