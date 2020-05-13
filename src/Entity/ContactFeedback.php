@@ -62,6 +62,11 @@ class ContactFeedback
      */
     private $is_confidentiality;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ContactFeedbackStatus")
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +140,18 @@ class ContactFeedback
     public function setIsConfidentiality(bool $is_confidentiality): self
     {
         $this->is_confidentiality = $is_confidentiality;
+
+        return $this;
+    }
+
+    public function getStatus(): ?ContactFeedbackStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?ContactFeedbackStatus $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
