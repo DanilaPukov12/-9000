@@ -41,7 +41,7 @@ class ContactFeedbackType extends AbstractType
                 ]
             ])
             ->add('is_confidentiality', CheckboxType::class, [
-                'required' => false
+                'required' => true
             ]);
     }
 
