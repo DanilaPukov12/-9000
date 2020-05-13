@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ContactFeedbackStatus;
 use App\Form\ContactFeedbackType;
 use App\Form\OrderType;
 use App\Services\FeedbackMailer;
@@ -66,9 +67,10 @@ class AboutController extends AbstractController
      * @Route("/contacts", name="contacts")
      * @param Request $request
      * @param EntityManagerInterface $em
+     * @param FeedbackMailer $feedbackMailer
      * @return Response
      */
-    public function contacts(Request $request, EntityManagerInterface $em, FeedbackMailer $mailer)
+    public function contacts(Request $request, EntityManagerInterface $em, FeedbackMailer $feedbackMailer)
     {
         $formFeedback = $this->createForm(ContactFeedbackType::class);
         $formFeedback->handleRequest($request);
@@ -76,12 +78,17 @@ class AboutController extends AbstractController
         if($formFeedback->isSubmitted() && $formFeedback->isValid()) {
             $feedback = $formFeedback->getData();
 
+            $feedbackDefaultStatus = $em->getRepository(ContactFeedbackStatus::class)->findOneBy(['name' => 'Не обработано']);
+            $feedback->setStatus($feedbackDefaultStatus);
+
             $em->persist($feedback);
             $em->flush();
 
             $this->addFlash('form.feedback.success', "Спасибо за сообщение! Оно будет обязательно рассмотрено");
 
-            $mailer->send($feedback);
+            if(isset($_ENV['APP_ENV']) && $_ENV['APP_ENV'] === 'prod') {
+                $feedbackMailer->send($feedback);
+            }
 
             return $this->redirectToRoute('contacts');
         }

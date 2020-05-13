@@ -2,19 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\ContactFeedbackStatus;
 use App\Form\ContactFeedbackType;
 use App\Form\OrderType;
 use App\Services\FeedbackMailer;
-use App\Services\OrderMailer;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\VarDumper\VarDumper;
 
 class IndexController extends AbstractController
 {
@@ -33,13 +29,17 @@ class IndexController extends AbstractController
         if($formFeedback->isSubmitted() && $formFeedback->isValid()) {
             $feedback = $formFeedback->getData();
 
+            $feedbackDefaultStatus = $em->getRepository(ContactFeedbackStatus::class)->findOneBy(['name' => 'Не обработано']);
+            $feedback->setStatus($feedbackDefaultStatus);
+
             $em->persist($feedback);
             $em->flush();
 
             $this->addFlash('form.feedback.success', "Спасибо за сообщение! Оно будет обязательно рассмотрено");
 
-            $feedbackMailer->send($feedback);
-
+            if(isset($_ENV['APP_ENV']) && $_ENV['APP_ENV'] === 'prod') {
+                $feedbackMailer->send($feedback);
+            }
             return $this->redirectToRoute('index');
         }
 
