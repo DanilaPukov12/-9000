@@ -58,7 +58,7 @@
                                     <td>{{ msg.nameclient }}</td>
                                     <td>{{ msg.title }}</td>
                                     <td>{{ msg.mail }}</td>
-                                    <td>{{ msg.content }}</td>
+                                    <td><div style="max-height: 200px; overflow: auto">{{ msg.content }}</div></td>
                                     <td>{{ msg.createdAt | date }}</td>
                                     <td>
                                         <select class="form-control select-status-feedback"
