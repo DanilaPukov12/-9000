@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ContactFeedback;
 use App\Entity\ContactFeedbackStatus;
 use App\Entity\Order;
+use App\Entity\OrderStatus;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -80,10 +81,42 @@ class IndexAdminController extends AbstractController
     public function order(EntityManagerInterface $em)
     {
         $orders = $em->getRepository(Order::class)->findAll();
+        $orderStatuses = $em->getRepository(OrderStatus::class)->findAll();
 
         return $this->render('index_admin/index/order.html.twig', [
             'orders' => $orders,
+            'order_statuses' => $orderStatuses,
             'is_admin_order' => 'active'
         ]);
+    }
+
+    /**
+     * @Route("/admin/set-order-status", name="set_order_status")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function setOrderStatus(Request $request, EntityManagerInterface $em)
+    {
+        $order_id = $request->request->get('order_id');
+        $status_id = $request->request->get('status_id');
+
+        if ($request->isXmlHttpRequest() && $order_id && $status_id) {
+            $order = $em->getRepository(Order::class)->findOneBy(['id' => $order_id]);
+            $status = $em->getRepository(OrderStatus::class)->findOneBy(['id' => $status_id]);
+
+            if (is_null($order) || is_null($status)) {
+                throw $this->createNotFoundException();
+            }
+
+            $order->setStatus($status);
+
+            $em->persist($order);
+            $em->flush();
+
+            return new JsonResponse(['status' => 'success']);
+        }
+
+        throw $this->createNotFoundException();
     }
 }

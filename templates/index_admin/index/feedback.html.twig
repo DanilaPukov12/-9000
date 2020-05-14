@@ -156,7 +156,6 @@
     <script>
         $(function () {
             $('#content-feedback-msg').delegate('.select-status-feedback', 'change', event => {
-                console.log('test');
                 const $status_id = event.target.value;
                 const $feedback_id = $(event.target).data('feedback-id');
                 $.ajax({

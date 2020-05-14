@@ -76,6 +76,11 @@ class Order
      */
     private $is_confidentiality;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\OrderStatus")
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -209,6 +214,18 @@ class Order
     public function setIsConfidentiality(bool $is_confidentiality): self
     {
         $this->is_confidentiality = $is_confidentiality;
+
+        return $this;
+    }
+
+    public function getStatus(): ?OrderStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?OrderStatus $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

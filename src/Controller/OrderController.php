@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\OrderStatus;
 use App\Form\OrderType;
 use App\Services\OrderMailer;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,6 +27,10 @@ class OrderController extends AbstractController
 
         if ($formOrder->isSubmitted() && $formOrder->isValid()) {
             $order = $formOrder->getData();
+
+            $status = $em->getRepository(OrderStatus::class)->findAll()[0];
+
+            $order->setStatus($status);
 
             $em->persist($order);
             $em->flush();
