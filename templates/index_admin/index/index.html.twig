@@ -30,9 +30,22 @@
                             <h5 class="card-title">Таблица с обратной связью</h5>
 
                             <p class="card-text">
-                                Здесь можно посмореть сообщения, поступившие на сайт.
+                                Здесь можно посмореть сообщения, поступившие на сайт, и установить их статус
                             </p>
-                            <a href="{{ path("admin_feedback") }}" class="card-link">Пурейти</a>
+                            <a href="{{ path("admin_feedback") }}" class="card-link" title="Обратная связь">Пурейти</a>
+                        </div>
+                    </div><!-- /.card -->
+                </div>
+                <!-- /.col-lg-6 -->
+                <div class="col-lg-6">
+                    <div class="card card-primary card-outline">
+                        <div class="card-body">
+                            <h5 class="card-title">Заказы</h5>
+
+                            <p class="card-text">
+                                Отображение всех поступивших заказов и обноление статуса
+                            </p>
+                            <a href="{{ path("admin_order") }}" class="card-link" title="Заказы">Пурейти</a>
                         </div>
                     </div><!-- /.card -->
                 </div>

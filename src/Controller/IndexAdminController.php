@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ContactFeedback;
 use App\Entity\ContactFeedbackStatus;
+use App\Entity\Order;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -56,7 +57,7 @@ class IndexAdminController extends AbstractController
             $feedback = $em->getRepository(ContactFeedback::class)->findOneBy(['id' => $feedback_id]);
             $status = $em->getRepository(ContactFeedbackStatus::class)->findOneBy(['id' => $status_id]);
 
-            if(is_null($feedback) || is_null($status)) {
+            if (is_null($feedback) || is_null($status)) {
                 throw $this->createNotFoundException();
             }
 
@@ -69,5 +70,20 @@ class IndexAdminController extends AbstractController
         }
 
         throw $this->createNotFoundException();
+    }
+
+    /**
+     * @Route("/admin/order", name="admin_order")
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function order(EntityManagerInterface $em)
+    {
+        $orders = $em->getRepository(Order::class)->findAll();
+
+        return $this->render('index_admin/index/order.html.twig', [
+            'orders' => $orders,
+            'is_admin_order' => 'active'
+        ]);
     }
 }

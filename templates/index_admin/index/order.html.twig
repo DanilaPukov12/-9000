@@ -1,0 +1,224 @@
+{% extends 'index_admin/base_admin.html.twig' %}
+
+{% block title %}{{ parent() }} - Заказы{% endblock %}
+
+{% block stylesheets %}
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('vendors/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ asset('vendors/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/admin/plugins/toastr/toastr.min.css') }}">
+
+    {{ parent() }}
+{% endblock %}
+
+{% block content_wrapper_header %}
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Обратная связь</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ path('index_admin') }}">Главная</a></li>
+                        <li class="breadcrumb-item active">Заказы</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+{% endblock %}
+
+{% block content_wrapper_main %}
+    <section class="content" id="content-feedback-msg">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="table-feedback" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Имя</th>
+                                <th>Почта</th>
+                                <th>Дата и время заказа</th>
+                                <th>Адрес / От куда</th>
+                                <th>Адрес / Куда</th>
+                                <th>Дата</th>
+                                <th>Время отправления</th>
+                                <th>Время прибытия</th>
+                                <th>Телефон</th>
+                                <th>Кол-во пассажиров</th>
+                                <th>Статус</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>{{ order.id }}</td>
+                                    <td>{{ order.name }}</td>
+                                    <td>{{ order.email ?? '-'}}</td>
+                                    <td>{{ order.createdAt | date }}</td>
+                                    <td>{{ order.addressFrom ?? '-' }}</td>
+                                    <td>{{ order.addressAt ?? '-' }}</td>
+                                    <td>{% if not order.date is null %}{{ order.date | date("F d, Y") }}{% else %}-{% endif %}</td>
+                                    <td>{% if not order.timeFrom is null %}{{ order.timeFrom | date("G:i") }}{% else %}-{% endif %}</td>
+                                    <td>{% if not order.timeAt is null %}{{ order.timeAt | date("G:i") }}{% else %}-{% endif %}</td>
+                                    <td>{% if not order.phone is null %}+7 {{ order.phone }}{% else%}-{% endif %}</td>
+                                    <td>{{ order.number ?? '-' }}</td>
+                                    <td>
+                                        <select class="form-control">
+                                            <option value="v1">v1</option>
+                                            <option value="v2">v2</option>
+                                            <option value="v3">v3</option>
+                                            <option value="v4">v4</option>
+                                            <option value="v5">v5</option>
+                                            <option value="v6">v6</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+{#                            {% for msg in messages %}#}
+{#                                <tr>#}
+{#                                    <td>{{ msg.id }}</td>#}
+{#                                    <td>{{ msg.nameclient }}</td>#}
+{#                                    <td>{{ msg.title }}</td>#}
+{#                                    <td>{{ msg.mail }}</td>#}
+{#                                    <td>{{ msg.content }}</td>#}
+{#                                    <td>{{ msg.createdAt | date }}</td>#}
+{#                                    <td>#}
+{#                                        <select class="form-control select-status-feedback"#}
+{#                                                data-feedback-id="{{ msg.id }}">#}
+{#                                            {% if not msg.status is null %}#}
+{#                                                {% set current_status = msg.status.id %}#}
+{#                                            {% else %}#}
+{#                                                {% set current_status = 1 %}#}
+{#                                            {% endif %}#}
+{#                                            {% for status in feedback_statuses %}#}
+{#                                                <option value="{{ status.id }}"#}
+{#                                                        {% if current_status == status.id %}selected{% endif %}>#}
+{#                                                    {{ status.name }}#}
+{#                                                </option>#}
+{#                                            {% endfor %}#}
+{#                                        </select>#}
+{#                                    </td>#}
+{#                                </tr>#}
+{#                            {% endfor %}#}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>№</th>
+                                <th>Имя</th>
+                                <th>Почта</th>
+                                <th>Дата и время заказа</th>
+                                <th>Адрес / От куда</th>
+                                <th>Адрес / Куда</th>
+                                <th>Дата</th>
+                                <th>Время отправления</th>
+                                <th>Время прибытия</th>
+                                <th>Телефон</th>
+                                <th>Кол-во пассажиров</th>
+                                <th>Статус</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+{% endblock %}
+
+{% block main_scripts %}
+    <!-- DataTables -->
+    <script src="{{ asset('vendors/admin/plugins/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('vendors/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('vendors/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('vendors/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('vendors/admin/plugins/toastr/toastr.min.js') }}"></script>
+
+    {{ parent() }}
+
+    <!-- AdminLTE for demo purposes -->
+    {#    <script src="{{ asset('js/admin/demo.js') }}"></script>#}
+    <!-- page script -->
+    <script>
+        $(function () {
+            $("#table-feedback").DataTable({
+                // "responsive": true,
+                "scrollX": true,
+                "language": {
+                    "infoEmpty": "Совпадающих записей не найдено",
+                    "infoFiltered": " - отфильтровано <b>_MAX_</b> записей",
+                    "emptyTable": "Данные отсутствуют в таблице",
+                    "paginate": {
+                        "previous": "Назад",
+                        "next": "Вперед",
+                        "last": "В конец",
+                        "first": "В начало"
+                    },
+                    "lengthMenu": "Показать _MENU_ записей на странице",
+                    "sInfo": "Показаны записи с _START_ по _END_ из   _TOTAL_ entries",
+                    "sSearch": "Поиск:"
+                },
+                "order": [[3, "desc"]],
+                "columns": [
+                    {"width": "20px"}, // №
+                    {"width": "100px"}, // name
+                    {"width": "100px"}, // email
+                    {"width": "120px"}, // created at
+                    {"width": "150px"}, // address from
+                    {"width": "150px"}, // address at
+                    {"width": "100px"}, // date
+                    {"width": "40px"}, // time
+                    {"width": "40px"}, // time
+                    {"width": "100px"}, // phone
+                    {"width": "100px"}, // number
+                    {
+                        "width": "150px",
+                        "searchable": false,
+                        "orderable": false
+                    }, // status
+                ]
+            });
+        });
+    </script>
+
+{#    <!-- script change status to feedback msg -->#}
+{#    <script>#}
+{#        $(function () {#}
+{#            $('#content-feedback-msg').delegate('.select-status-feedback', 'change', event => {#}
+{#                console.log('test');#}
+{#                const $status_id = event.target.value;#}
+{#                const $feedback_id = $(event.target).data('feedback-id');#}
+{#                $.ajax({#}
+{#                    url: '{{ path('set_feedback_status') }}',#}
+{#                    method: 'post',#}
+{#                    dataType: 'json',#}
+{#                    data: {#}
+{#                        status_id: $status_id,#}
+{#                        feedback_id: $feedback_id#}
+{#                    },#}
+{#                    success: function (data) {#}
+{#                        if (data.status === 'success') {#}
+{#                            toastr.success('Состояние статуса для сообщения № ' + $feedback_id + ' успешно обновлено!');#}
+{#                        } else {#}
+{#                            toastr.error('Попробуйте отправить запрос позже', 'Ошибка работы сервера');#}
+{#                        }#}
+{#                    },#}
+{#                    error: function () {#}
+{#                        toastr.error('Попробуйте отправить запрос позже', 'Ошибка работы сервера');#}
+{#                    }#}
+{#                });#}
+{#            });#}
+{#        });#}
+{#    </script>#}
+{% endblock %}
