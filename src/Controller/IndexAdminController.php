@@ -4,7 +4,11 @@ namespace App\Controller;
 
 use App\Entity\ContactFeedback;
 use App\Entity\ContactFeedbackStatus;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexAdminController extends AbstractController
@@ -22,7 +26,8 @@ class IndexAdminController extends AbstractController
     /**
      * @Route("/admin/feedback", name="admin_feedback")
      */
-    public function feedback() {
+    public function feedback()
+    {
         $em = $this->getDoctrine()->getManager();
 
         $messages = $em->getRepository(ContactFeedback::class)->findAll();
@@ -34,5 +39,35 @@ class IndexAdminController extends AbstractController
             'feedback_statuses' => $feedbackStatuses,
             'is_admin_feedback' => 'active'
         ]);
+    }
+
+    /**
+     * @Route("/admin/set-feedback-status", name="set_feedback_status")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function setFeedbackStatus(Request $request, EntityManagerInterface $em)
+    {
+        $feedback_id = $request->request->get('feedback_id');
+        $status_id = $request->request->get('status_id');
+
+        if ($request->isXmlHttpRequest() && $feedback_id && $status_id) {
+            $feedback = $em->getRepository(ContactFeedback::class)->findOneBy(['id' => $feedback_id]);
+            $status = $em->getRepository(ContactFeedbackStatus::class)->findOneBy(['id' => $status_id]);
+
+            if(is_null($feedback) || is_null($status)) {
+                throw $this->createNotFoundException();
+            }
+
+            $feedback->setStatus($status);
+
+            $em->persist($feedback);
+            $em->flush();
+
+            return new JsonResponse(['status' => 'success']);
+        }
+
+        throw $this->createNotFoundException();
     }
 }
