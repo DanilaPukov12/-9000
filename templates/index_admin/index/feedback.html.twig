@@ -33,7 +33,7 @@
 {% endblock %}
 
 {% block content_wrapper_main %}
-    <section class="content">
+    <section class="content" id="content-feedback-msg">
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -42,6 +42,7 @@
                         <table id="table-feedback" class="table table-bordered table-striped">
                             <thead>
                             <tr>
+                                <th>№</th>
                                 <th>Имя</th>
                                 <th>Тема сообщения</th>
                                 <th>Почта</th>
@@ -53,6 +54,7 @@
                             <tbody>
                             {% for msg in messages %}
                                 <tr>
+                                    <td>{{ msg.id }}</td>
                                     <td>{{ msg.nameclient }}</td>
                                     <td>{{ msg.title }}</td>
                                     <td>{{ msg.mail }}</td>
@@ -79,6 +81,7 @@
                             </tbody>
                             <tfoot>
                             <tr>
+                                <th>№</th>
                                 <th>Имя</th>
                                 <th>Тема сообщения</th>
                                 <th>Почта</th>
@@ -131,12 +134,13 @@
                     "sInfo": "Показаны сообщения с _START_ по _END_ из   _TOTAL_ entries",
                     "sSearch": "Поиск:"
                 },
-                "order": [[4, "desc"]],
+                "order": [[5, "desc"]],
                 "columns": [
+                    {"width": "2%"},
                     {"width": "9%"},
                     {"width": "14%"},
                     {"width": "14%"},
-                    {"width": "45%"},
+                    {"width": "43%"},
                     {"width": "8%"},
                     {
                         "width": "10%",
@@ -151,7 +155,8 @@
     <!-- script change status to feedback msg -->
     <script>
         $(function () {
-            $('.select-status-feedback').on('change', event => {
+            $('#content-feedback-msg').delegate('.select-status-feedback', 'change', event => {
+                console.log('test');
                 const $status_id = event.target.value;
                 const $feedback_id = $(event.target).data('feedback-id');
                 $.ajax({
@@ -164,7 +169,7 @@
                     },
                     success: function (data) {
                         if (data.status === 'success') {
-                            toastr.success('Состояние статуса успешно обновлено!')
+                            toastr.success('Состояние статуса для сообщения № ' + $feedback_id + ' успешно обновлено!');
                         } else {
                             toastr.error('Попробуйте отправить запрос позже', 'Ошибка работы сервера');
                         }
