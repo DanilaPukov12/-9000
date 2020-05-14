@@ -49,6 +49,7 @@
                                 <th>Сообщение</th>
                                 <th>Дата и время</th>
                                 <th>Статус</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -76,6 +77,7 @@
                                             {% endfor %}
                                         </select>
                                     </td>
+                                    <td><a href="{{ path("delete_feedback", {feedback: msg.id}) }}" class="btn btn-block bg-gradient-danger">Удалить</a></td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -88,6 +90,7 @@
                                 <th>Сообщение</th>
                                 <th>Дата и время</th>
                                 <th>Статус</th>
+                                <th></th>
                             </tr>
                             </tfoot>
                         </table>
@@ -95,6 +98,10 @@
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12">
+                <a href="{{ path('delete_all_feedback') }}" class="btn btn-block bg-gradient-danger btn-lg">Удалить все сообщения</a>
             </div>
             <!-- /.col -->
         </div>
@@ -140,13 +147,18 @@
                     {"width": "9%"},
                     {"width": "14%"},
                     {"width": "14%"},
-                    {"width": "43%"},
+                    {"width": "40%"},
                     {"width": "8%"},
                     {
                         "width": "10%",
                         "searchable": false,
                         "orderable": false
                     },
+                    {
+                        "width": "3%",
+                        "searchable": false,
+                        "orderable": false
+                    }
                 ],
             });
         });

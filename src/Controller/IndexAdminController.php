@@ -75,6 +75,48 @@ class IndexAdminController extends AbstractController
     }
 
     /**
+     * @Route("/admin/delete-feedback/{feedback}", name="delete_feedback")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param ContactFeedback $feedback
+     * @return Response
+     */
+    public function deleteFeedback(Request $request, EntityManagerInterface $em, ContactFeedback $feedback)
+    {
+        $feedback_url = $this->generateUrl('admin_feedback', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $redirect_url = $request->headers->get('referer');
+
+        if ($feedback_url !== $redirect_url) {
+            throw $this->createNotFoundException();
+        }
+
+        $em->remove($feedback);
+        $em->flush();
+
+        return $this->redirect($redirect_url);
+    }
+
+    /**
+     * @Route("/admin/delete-all-feedback", name="delete_all_feedback")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function deleteAllFeedback(Request $request, EntityManagerInterface $em)
+    {
+        $feedback_url = $this->generateUrl('admin_feedback', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $redirect_url = $request->headers->get('referer');
+
+        if ($feedback_url !== $redirect_url) {
+            throw $this->createNotFoundException();
+        }
+
+        $em->getRepository(ContactFeedback::class)->deleteAll();
+
+        return $this->redirect($redirect_url);
+    }
+
+    /**
      * @Route("/admin/order", name="admin_order")
      * @param EntityManagerInterface $em
      * @return Response

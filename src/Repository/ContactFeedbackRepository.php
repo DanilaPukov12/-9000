@@ -19,6 +19,15 @@ class ContactFeedbackRepository extends ServiceEntityRepository
         parent::__construct($registry, ContactFeedback::class);
     }
 
+    public function deleteAll()
+    {
+        return $this->createQueryBuilder('c')
+            ->delete()
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return ContactFeedback[] Returns an array of ContactFeedback objects
     //  */
