@@ -142,4 +142,24 @@ class IndexAdminController extends AbstractController
 
         return $this->redirect($redirect_url);
     }
+
+    /**
+     * @Route("/admin/delete-all-order", name="delete_all_order")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function deleteAllOrder(Request $request, EntityManagerInterface $em)
+    {
+        $order_url = $this->generateUrl('admin_order', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $redirect_url = $request->headers->get('referer');
+
+        if ($order_url !== $redirect_url) {
+            throw $this->createNotFoundException();
+        }
+
+        $em->getRepository(Order::class)->deleteAll();
+
+        return $this->redirect($redirect_url);
+    }
 }
