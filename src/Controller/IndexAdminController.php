@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class IndexAdminController extends AbstractController
 {
@@ -118,5 +119,27 @@ class IndexAdminController extends AbstractController
         }
 
         throw $this->createNotFoundException();
+    }
+
+    /**
+     * @Route("/admin/delete-order/{order}", name="delete_order")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param Order $order
+     * @return Response
+     */
+    public function deleteOrder(Request $request, EntityManagerInterface $em, Order $order)
+    {
+        $order_url = $this->generateUrl('admin_order', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $redirect_url = $request->headers->get('referer');
+
+        if ($order_url !== $redirect_url) {
+            throw $this->createNotFoundException();
+        }
+
+        $em->remove($order);
+        $em->flush();
+
+        return $this->redirect($redirect_url);
     }
 }
