@@ -45,6 +45,7 @@
                                 <th>Почта</th>
                                 <th>Сообщение</th>
                                 <th>Дата и время</th>
+                                <th>Статус</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,6 +56,18 @@
                                     <td>{{ msg.mail }}</td>
                                     <td>{{ msg.content }}</td>
                                     <td>{{ msg.createdAt | date }}</td>
+                                    <td>
+                                        <select class="form-control">
+                                            {% if not msg.status is null %}
+                                                {% set current_status = msg.status.id %}
+                                            {% else %}
+                                                {% set current_status = 1 %}
+                                            {% endif %}
+                                            {% for status in feedback_statuses %}
+                                                <option value="{{ status.id }}" {% if current_status == status.id %}selected{% endif %}>{{ status.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -65,6 +78,7 @@
                                 <th>Почта</th>
                                 <th>Сообщение</th>
                                 <th>Дата и время</th>
+                                <th>Статус</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -112,11 +126,16 @@
                 },
                 "order": [[4, "desc"]],
                 "columns": [
-                    { "width": "10%" },
-                    { "width": "15%" },
-                    { "width": "15%" },
+                    { "width": "9%" },
+                    { "width": "14%" },
+                    { "width": "14%" },
                     { "width": "45%" },
-                    { "width": "15%" },
+                    { "width": "8%" },
+                    {
+                        "width": "10%",
+                        "searchable": false,
+                        "orderable": false
+                    },
                 ],
             });
         });
