@@ -21,6 +21,10 @@ class IndexAdminController extends AbstractController
      */
     public function index()
     {
+        if (!$this->getUser()) {
+            throw $this->createNotFoundException();
+        }
+
         return $this->render('index_admin/index/index.html.twig', [
             'is_admin_index' => 'active'
         ]);
@@ -31,6 +35,10 @@ class IndexAdminController extends AbstractController
      */
     public function feedback()
     {
+        if (!$this->getUser()) {
+            throw $this->createNotFoundException();
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $messages = $em->getRepository(ContactFeedback::class)->findAll();
@@ -52,6 +60,10 @@ class IndexAdminController extends AbstractController
      */
     public function setFeedbackStatus(Request $request, EntityManagerInterface $em)
     {
+        if (!$this->getUser()) {
+            throw $this->createNotFoundException();
+        }
+
         $feedback_id = $request->request->get('feedback_id');
         $status_id = $request->request->get('status_id');
 
@@ -83,6 +95,10 @@ class IndexAdminController extends AbstractController
      */
     public function deleteFeedback(Request $request, EntityManagerInterface $em, ContactFeedback $feedback)
     {
+        if (!$this->getUser()) {
+            throw $this->createNotFoundException();
+        }
+
         $feedback_url = $this->generateUrl('admin_feedback', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $redirect_url = $request->headers->get('referer');
 
@@ -104,6 +120,10 @@ class IndexAdminController extends AbstractController
      */
     public function deleteAllFeedback(Request $request, EntityManagerInterface $em)
     {
+        if (!$this->getUser()) {
+            throw $this->createNotFoundException();
+        }
+
         $feedback_url = $this->generateUrl('admin_feedback', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $redirect_url = $request->headers->get('referer');
 
@@ -123,6 +143,10 @@ class IndexAdminController extends AbstractController
      */
     public function order(EntityManagerInterface $em)
     {
+        if (!$this->getUser()) {
+            throw $this->createNotFoundException();
+        }
+
         $orders = $em->getRepository(Order::class)->findAll();
         $orderStatuses = $em->getRepository(OrderStatus::class)->findAll();
 
@@ -141,6 +165,10 @@ class IndexAdminController extends AbstractController
      */
     public function setOrderStatus(Request $request, EntityManagerInterface $em)
     {
+        if (!$this->getUser()) {
+            throw $this->createNotFoundException();
+        }
+
         $order_id = $request->request->get('order_id');
         $status_id = $request->request->get('status_id');
 
@@ -172,6 +200,10 @@ class IndexAdminController extends AbstractController
      */
     public function deleteOrder(Request $request, EntityManagerInterface $em, Order $order)
     {
+        if (!$this->getUser()) {
+            throw $this->createNotFoundException();
+        }
+
         $order_url = $this->generateUrl('admin_order', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $redirect_url = $request->headers->get('referer');
 
@@ -193,6 +225,10 @@ class IndexAdminController extends AbstractController
      */
     public function deleteAllOrder(Request $request, EntityManagerInterface $em)
     {
+        if (!$this->getUser()) {
+            throw $this->createNotFoundException();
+        }
+
         $order_url = $this->generateUrl('admin_order', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $redirect_url = $request->headers->get('referer');
 

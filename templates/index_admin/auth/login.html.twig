@@ -1,0 +1,99 @@
+{% extends 'index_admin/base_admin.html.twig' %}
+
+{% block title %}{{ parent() }} - Авторизация {% endblock %}
+
+{% block stylesheets %}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('vendors/admin/plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="{{ asset('vendors/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('css/admin/adminlte.min.css') }}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="register-logo">
+            <a href="{{ path('index_admin') }}"><b>МУП ЭКСПРЕСС</b></a>
+        </div>
+
+        <div class="card">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">Авторизация</p>
+
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            Вы авторизованы как {{ app.user.username }}, <a href="{{ path('admin_logout') }}">Выйти</a>
+                        </div>
+                    {% endif %}
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" value="{{ last_username }}" name="email" required autofocus placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" name="password" class="form-control" required placeholder="Пароль">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    {#
+                        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                        See https://symfony.com/doc/current/security/remember_me.html
+
+                        <div class="checkbox mb-3">
+                            <label>
+                                <input type="checkbox" name="_remember_me"> Remember me
+                            </label>
+                        </div>
+                    #}
+
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="offset-6 col-6">
+                            <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                <div class="social-auth-links text-center">
+                    <p>- ИЛИ -</p>
+                    <a href="{{ path('admin_registration') }}" class="btn btn-block btn-primary">
+                        <i class="fas fa-sign-in-alt mr-2"></i>
+                        Зарегистрироваться
+                    </a>
+                </div>
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
+    </div>
+    <!-- /.register-box -->
+
+    <!-- jQuery -->
+    <script src="{{ asset('vendors/admin/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('vendors/admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('js/admin/adminlte.min.js') }}"></script>
+    </body>
+{% endblock %}

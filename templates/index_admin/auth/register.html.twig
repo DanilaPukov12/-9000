@@ -1,0 +1,96 @@
+{% extends 'index_admin/base_admin.html.twig' %}
+
+{% block title %}{{ parent() }} - Регистрация {% endblock %}
+
+{% block stylesheets %}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('vendors/admin/plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="{{ asset('vendors/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('css/admin/adminlte.min.css') }}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="register-logo">
+            <a href="{{ path('index_admin') }}"><b>МУП ЭКСПРЕСС</b></a>
+        </div>
+
+        <div class="card">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">Регистрация нового сотрудника</p>
+
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                <div class="input-group mb-3">
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                {{ form_errors(form.email) }}
+                <div class="input-group mb-3">
+                    {{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Пароль'}}) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                {{ form_errors(form.password) }}
+                <div class="input-group mb-3">
+                    {{ form_widget(form.recovery_password, {'attr': {'class': 'form-control', 'placeholder': 'Поторите пароль'}}) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                {{ form_errors(form.recovery_password) }}
+                <div class="input-group mb-3">
+                    {{ form_widget(form.registration_key, {'attr': {'class': 'form-control', 'placeholder': 'Ключ регистрации'}}) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-key"></span>
+                        </div>
+                    </div>
+                </div>
+                {{ form_errors(form.registration_key) }}
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="offset-6 col-6">
+                        <button type="submit" class="btn btn-primary btn-block">Регистрация</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                {{ form_end(form) }}
+
+                <div class="social-auth-links text-center">
+                    <p>- ИЛИ -</p>
+                    <a href="{{ path("admin_login") }}" class="btn btn-block btn-primary">
+                        <i class="fas fa-sign-in-alt mr-2"></i>
+                        Войти в аккаунт
+                    </a>
+                </div>
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
+    </div>
+    <!-- /.register-box -->
+
+    <!-- jQuery -->
+    <script src="{{ asset('vendors/admin/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('vendors/admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('js/admin/adminlte.min.js') }}"></script>
+    </body>
+{% endblock %}
