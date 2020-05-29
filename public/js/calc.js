@@ -1,10 +1,25 @@
-;(function ($) {
+;(async function ($) {
     "use strict"
 
-    const $transport_price = {
-        'paz': 1200,
-        'liaz': 1500
+    async function getPrice() {
+        let $price;
+        await $.ajax({
+            url: 'api/price',
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                $price = data;
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+
+        return $price;
     }
+
+    let $transport_price = await getPrice();
 
     const $transport_num_seats = {
         'paz': 19,
